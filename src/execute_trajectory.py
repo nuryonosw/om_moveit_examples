@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 #Code taken from Robot Ignite Academy. If perfroms multiple movements in the joint task space. The arm
 # will move from the home position to a position above a 40x40mm cube, the pick the cube up, return home, 
@@ -18,16 +18,17 @@ values2 = [0.0,0.4,-0.25,1.35]
 
 ###### Functions ########
 def open_gripper():
-	print "Opening Gripper..."
+	print ("Opening Gripper...")
 	gripper_group_variable_values[0] = 00.009
 	gripper_group.set_joint_value_target(gripper_group_variable_values)
 	plan2 = gripper_group.go()
+	
 	gripper_group.stop()
 	gripper_group.clear_pose_targets()
 	rospy.sleep(1)
 
 def close_gripper():
-	print "Closing Gripper..."
+	print ("Closing Gripper...")
 	gripper_group_variable_values[0] = -00.0006
 	gripper_group.set_joint_value_target(gripper_group_variable_values)
 	plan2 = gripper_group.go()
@@ -37,8 +38,9 @@ def close_gripper():
 
 def move_home():
 	arm_group.set_named_target("home")
-	print "Executing Move: Home"
-	plan1 = arm_group.plan()
+	print ("Executing Move: Home")
+	#plan1 = arm_group.plan()
+	plan_success, plan1, planning_time, error_code = arm_group.plan()
 	arm_group.execute(plan1, wait=True)
 	arm_group.stop()
 	arm_group.clear_pose_targets()
@@ -48,8 +50,9 @@ def move_home():
 
 def move_zero():
 	arm_group.set_named_target("zero")
-	print "Executing Move: Zero"
-	plan1 = arm_group.plan()
+	print ("Executing Move: Zero")
+	#plan1 = arm_group.plan()
+	plan_success, plan1, planning_time, error_code = arm_group.plan()
 	arm_group.execute(plan1, wait=True)
 	arm_group.stop()
 	arm_group.clear_pose_targets()
@@ -59,8 +62,9 @@ def move_zero():
 
 def move_position1():
 	arm_group.set_named_target("position1")
-	print "Executing Move: Position1"
-	plan1 = arm_group.plan()
+	print ("Executing Move: Position1")
+	#plan1 = arm_group.plan()
+	plan_success, plan1, planning_time, error_code = arm_group.plan()
 	arm_group.execute(plan1, wait=True)
 	arm_group.stop()
 	arm_group.clear_pose_targets()
@@ -70,8 +74,9 @@ def move_position1():
 
 def move_position2():
 	arm_group.set_named_target("position2")
-	print "Executing Move: Position2"
-	plan1 = arm_group.plan()
+	print ("Executing Move: Position2")
+	#plan1 = arm_group.plan()
+	plan_success, plan1, planning_time, error_code = arm_group.plan()
 	arm_group.execute(plan1, wait=True)
 	arm_group.stop()
 	arm_group.clear_pose_targets()
